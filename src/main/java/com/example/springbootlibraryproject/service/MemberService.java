@@ -21,7 +21,6 @@ import java.util.Objects;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-
     private final MemmerMapper memmerMapper;
 
     public List<MemberResponseDto> getMembersAll() {
@@ -45,7 +44,7 @@ public class MemberService {
     }
 
     public List<MemberResponseDto> getMembersByGender(Gender gender) {
-        List<Member> memberList ;
+        List<Member> memberList;
         if (Objects.isNull(gender)) {
             throw new MemberException("Member gender must not be null or empty");
         }

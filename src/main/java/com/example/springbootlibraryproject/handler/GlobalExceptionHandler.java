@@ -14,10 +14,10 @@ import java.time.LocalDate;
 
 
 @RestControllerAdvice
-public class GlobalHandlerException {
+public class GlobalExceptionHandler {
     @ExceptionHandler(MemberException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<MemberErrorException> handleException(MemberException memberException,HttpServletRequest servletRequest) {
+    public ResponseEntity<MemberErrorException> handleException(MemberException memberException, HttpServletRequest servletRequest) {
         MemberErrorException exception = MemberErrorException.builder()
                 .status(HttpStatus.NOT_FOUND.value())
                 .timestamp(LocalDate.now())
@@ -31,7 +31,7 @@ public class GlobalHandlerException {
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<MemberErrorException> handleException(Exception exception,HttpServletRequest servletRequest) {
+    public ResponseEntity<MemberErrorException> handleException(Exception exception, HttpServletRequest servletRequest) {
         MemberErrorException errorException = MemberErrorException.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .timestamp(LocalDate.now())

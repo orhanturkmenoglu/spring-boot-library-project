@@ -27,7 +27,6 @@ public class BookService {
         return bookMapper.mapToBookResponseDtoList(bookList);
     }
 
-
     public BookResponseDto createBook(BookRequestDto bookRequestDto) {
         Book book = bookMapper.mapToBook(bookRequestDto);
         Book save = bookRepository.save(book);

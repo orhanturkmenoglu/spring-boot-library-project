@@ -17,7 +17,6 @@ import java.util.List;
 public class BorrowerService {
 
     private final BorrowerRepository borrowerRepository;
-
     private final BorrowerMapper borrowerMapper;
 
     public List<BorrowerResponseDto> getBorrowersAll() {

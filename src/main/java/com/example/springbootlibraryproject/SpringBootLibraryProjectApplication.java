@@ -11,20 +11,20 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @RequiredArgsConstructor
-public class SpringBootLibraryProjectApplication  implements CommandLineRunner {
+public class SpringBootLibraryProjectApplication implements CommandLineRunner {
 
 
-	private final BookRepository bookRepository;
-	private final ContactRepository contactRepository;
-	private final BorrowerRepository borrowerRepository;
-	private final MemberRepository memberRepository;
+    private final BookRepository bookRepository;
+    private final ContactRepository contactRepository;
+    private final BorrowerRepository borrowerRepository;
+    private final MemberRepository memberRepository;
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringBootLibraryProjectApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootLibraryProjectApplication.class, args);
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
+    @Override
+    public void run(String... args) throws Exception {
 
 /*		Book book1 = Book.builder()
 				.name("Bir Ömür Nasıl Yaşanır ?")
@@ -77,5 +77,5 @@ public class SpringBootLibraryProjectApplication  implements CommandLineRunner {
 				.build();
 
 		borrowerRepository.save(borrower);*/
-	}
+    }
 }

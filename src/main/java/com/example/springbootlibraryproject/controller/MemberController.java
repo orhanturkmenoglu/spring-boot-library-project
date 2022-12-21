@@ -3,8 +3,6 @@ package com.example.springbootlibraryproject.controller;
 import com.example.springbootlibraryproject.dto.request.MemberRequestDto;
 import com.example.springbootlibraryproject.dto.response.MemberResponseDto;
 import com.example.springbootlibraryproject.enums.Gender;
-import com.example.springbootlibraryproject.exceptions.MemberErrorException;
-import com.example.springbootlibraryproject.exceptions.MemberException;
 import com.example.springbootlibraryproject.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -48,7 +45,4 @@ public class MemberController {
         List<MemberResponseDto> memberResponseDtoList = memberService.getMembersByGender(gender);
         return ResponseEntity.ok().body(memberResponseDtoList);
     }
-
-
-
 }
