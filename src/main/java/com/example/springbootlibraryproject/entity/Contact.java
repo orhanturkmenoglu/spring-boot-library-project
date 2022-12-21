@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "contacts")
@@ -19,17 +18,14 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String city;
-    private String district; // ilçe
+    private String district;
     private String address;
     private String phoneNumber;
     private String email;
 
-
-    @ManyToOne
-    @JoinColumn(name = "member_id",referencedColumnName = "id")
-    @NotNull
-    private Member  member;
-
+    @OneToOne(mappedBy = "contact")
+    private Member member;
 
 }

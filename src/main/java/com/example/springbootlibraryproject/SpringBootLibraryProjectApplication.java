@@ -1,10 +1,5 @@
 package com.example.springbootlibraryproject;
 
-import com.example.springbootlibraryproject.entity.Book;
-import com.example.springbootlibraryproject.entity.Borrower;
-import com.example.springbootlibraryproject.entity.Contact;
-import com.example.springbootlibraryproject.entity.Member;
-import com.example.springbootlibraryproject.enums.Gender;
 import com.example.springbootlibraryproject.repository.BookRepository;
 import com.example.springbootlibraryproject.repository.BorrowerRepository;
 import com.example.springbootlibraryproject.repository.ContactRepository;
@@ -13,10 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 
 @SpringBootApplication
 @RequiredArgsConstructor
@@ -35,16 +26,14 @@ public class SpringBootLibraryProjectApplication  implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-
-		Book book1 = Book.builder()
+/*		Book book1 = Book.builder()
 				.name("Bir Ömür Nasıl Yaşanır ?")
 				.amountOfStock(5L)
-				.barcode("97897524300990")
+				.barcode("12345678900")
 				.creationDate(LocalDate.now())
 				.numbersOfPages(285L)
 				.publisher("Kronik Yayıncılık")
 				.author("İlber Ortaylı")
-				.dateOfIssue(null)
 				.build();
 
 		bookRepository.save(book1);
@@ -73,8 +62,11 @@ public class SpringBootLibraryProjectApplication  implements CommandLineRunner {
 
 		memberRepository.save(member1);
 
+
+
 		contact1.setMember(member1);
 		contactRepository.saveAll(contactList);
+
 
 		Borrower borrower = Borrower.builder()
 				.book(book1)
@@ -84,6 +76,6 @@ public class SpringBootLibraryProjectApplication  implements CommandLineRunner {
 				.returnDate(LocalDate.of(2022,12,29))
 				.build();
 
-		borrowerRepository.save(borrower);
+		borrowerRepository.save(borrower);*/
 	}
 }

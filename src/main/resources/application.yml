@@ -5,8 +5,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
+    url: jdbc:postgresql://localhost:5433/LibraryDB
+    username: postgres
+    password: 12345
   h2:
     console:
       enabled: true
