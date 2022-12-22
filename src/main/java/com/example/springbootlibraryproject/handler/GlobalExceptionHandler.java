@@ -1,6 +1,6 @@
 package com.example.springbootlibraryproject.handler;
 
-import com.example.springbootlibraryproject.exceptions.MemberErrorException;
+import com.example.springbootlibraryproject.exceptions.MemberErrorResponse;
 import com.example.springbootlibraryproject.exceptions.MemberException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +17,8 @@ import java.time.LocalDate;
 public class GlobalExceptionHandler {
     @ExceptionHandler(MemberException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<MemberErrorException> handleException(MemberException memberException, HttpServletRequest servletRequest) {
-        MemberErrorException exception = MemberErrorException.builder()
+    public ResponseEntity<MemberErrorResponse> handleException(MemberException memberException, HttpServletRequest servletRequest) {
+        MemberErrorResponse exception = MemberErrorResponse.builder()
                 .status(HttpStatus.NOT_FOUND.value())
                 .timestamp(LocalDate.now())
                 .message(memberException.getMessage())
@@ -31,8 +31,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<MemberErrorException> handleException(Exception exception, HttpServletRequest servletRequest) {
-        MemberErrorException errorException = MemberErrorException.builder()
+    public ResponseEntity<MemberErrorResponse> handleException(Exception exception, HttpServletRequest servletRequest) {
+        MemberErrorResponse errorException = MemberErrorResponse.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .timestamp(LocalDate.now())
                 .message(exception.getMessage())
@@ -44,8 +44,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<MemberErrorException> handleException(MethodArgumentNotValidException methodArgumentNotValidException, HttpServletRequest servletRequest) {
-        MemberErrorException errorException = MemberErrorException.builder()
+    public ResponseEntity<MemberErrorResponse> handleException(MethodArgumentNotValidException methodArgumentNotValidException, HttpServletRequest servletRequest) {
+        MemberErrorResponse errorException = MemberErrorResponse.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .timestamp(LocalDate.now())
                 .message(methodArgumentNotValidException.getMessage())
@@ -54,4 +54,6 @@ public class GlobalExceptionHandler {
                 .build();
         return ResponseEntity.badRequest().body(errorException);
     }
+
+
 }

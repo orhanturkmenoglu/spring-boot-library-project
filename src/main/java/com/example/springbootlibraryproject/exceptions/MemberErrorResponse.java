@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MemberErrorException {
+public class MemberErrorResponse {
 
     private int status;
     private String message;
