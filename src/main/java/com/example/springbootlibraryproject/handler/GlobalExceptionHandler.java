@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @RestControllerAdvice
@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<MemberErrorResponse> handleException(MemberException memberException, HttpServletRequest servletRequest) {
         MemberErrorResponse exception = MemberErrorResponse.builder()
                 .status(HttpStatus.NOT_FOUND.value())
-                .timestamp(LocalDate.now())
+                .timestamp(LocalDateTime.now())
                 .message(memberException.getMessage())
                 .error(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .path(servletRequest.getRequestURI())
@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<MemberErrorResponse> handleException(Exception exception, HttpServletRequest servletRequest) {
         MemberErrorResponse errorException = MemberErrorResponse.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
-                .timestamp(LocalDate.now())
+                .timestamp(LocalDateTime.now())
                 .message(exception.getMessage())
                 .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .path(servletRequest.getRequestURI())
@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<MemberErrorResponse> handleException(MethodArgumentNotValidException methodArgumentNotValidException, HttpServletRequest servletRequest) {
         MemberErrorResponse errorException = MemberErrorResponse.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
-                .timestamp(LocalDate.now())
+                .timestamp(LocalDateTime.now())
                 .message(methodArgumentNotValidException.getMessage())
                 .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .path(servletRequest.getRequestURI())
