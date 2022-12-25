@@ -5,6 +5,7 @@ public class MemberMessage {
     public static final String CREATE_MEMBER = "Member creation successful";
 
     public static final String GET_MEMBERS_ALL = "Fetch member list successful";
+    public static final String GET_MEMBERS_BY_GENDER = "Fetch members by gender successful";
 
     public static final String UPDATE_MEMBER = "Member update successful";
 

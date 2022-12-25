@@ -45,7 +45,7 @@ public class MemberController {
     @GetMapping("/getMembersGender")
     public ResponseEntity<List<MemberResponseDto>> getMembersByGender(@RequestParam("gender") Gender gender) {
         List<MemberResponseDto> memberResponseDtoList = memberService.getMembersByGender(gender);
-        return SuccessResponse.responseBuilder(MemberMessage.GET_MEMBERS_ALL, HttpStatus.OK, memberResponseDtoList);
+        return SuccessResponse.responseBuilder(MemberMessage.GET_MEMBERS_BY_GENDER, HttpStatus.OK, memberResponseDtoList);
     }
 
     @PutMapping
