@@ -2,6 +2,7 @@ package com.example.springbootlibraryproject.mapper;
 
 import com.example.springbootlibraryproject.dto.request.MemberRequestDto;
 import com.example.springbootlibraryproject.dto.response.MemberResponseDto;
+import com.example.springbootlibraryproject.dto.updateRequest.MemberUpdateRequestDto;
 import com.example.springbootlibraryproject.entity.Member;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,16 @@ public class MemmerMapper {
                 .stream()
                 .map(this::mapToMemberResponseDto)
                 .collect(Collectors.toList());
+    }
+
+    public Member mapToMember(MemberUpdateRequestDto memberUpdateRequestDto) {
+        return Member.builder()
+                .id(memberUpdateRequestDto.getId())
+                .firstName(memberUpdateRequestDto.getFirstName())
+                .lastName(memberUpdateRequestDto.getLastName())
+                .identityNo(memberUpdateRequestDto.getIdentityNo())
+                .gender(memberUpdateRequestDto.getGender())
+                .build();
     }
 
     public Member mapToMember(MemberRequestDto memberRequestDto) {

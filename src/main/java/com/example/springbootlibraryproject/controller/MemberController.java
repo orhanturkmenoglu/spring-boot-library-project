@@ -1,7 +1,9 @@
 package com.example.springbootlibraryproject.controller;
 
+import com.example.springbootlibraryproject.constants.MemberMessage;
 import com.example.springbootlibraryproject.dto.request.MemberRequestDto;
 import com.example.springbootlibraryproject.dto.response.MemberResponseDto;
+import com.example.springbootlibraryproject.dto.updateRequest.MemberUpdateRequestDto;
 import com.example.springbootlibraryproject.enums.Gender;
 import com.example.springbootlibraryproject.exceptions.ErrorResponse;
 import com.example.springbootlibraryproject.exceptions.SuccessResponse;
@@ -13,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,29 +29,34 @@ public class MemberController {
     @PostMapping
     public ResponseEntity<MemberResponseDto> createMember(@RequestBody MemberRequestDto memberRequestDto) {
         MemberResponseDto memberResponseDto = memberService.createMember(memberRequestDto);
-        return SuccessResponse.responseBuilder("Member successfully created", HttpStatus.CREATED, memberResponseDto);
+        return SuccessResponse.responseBuilder(MemberMessage.CREATE_MEMBER, HttpStatus.CREATED, memberResponseDto);
     }
 
     @GetMapping
-    public ResponseEntity<List<MemberResponseDto>> getMembersAll() {
+    public ResponseEntity<List<MemberResponseDto>> getMembersAll(@RequestParam(value = "firstName", required = false) String firstName) {
 
         if (LocalDateTime.now().getHour() == 11) {
-            return ErrorResponse.responseBuilder("System in maintenance ", HttpStatus.SERVICE_UNAVAILABLE);
+            return ErrorResponse.responseBuilder(MemberMessage.SERVICE_UNAVAILABLE, HttpStatus.SERVICE_UNAVAILABLE);
         }
-        List<MemberResponseDto> memberResponseDtoList = memberService.getMembersAll();
-        return SuccessResponse.responseBuilder("Member successfully listed", HttpStatus.OK, memberResponseDtoList);
+        List<MemberResponseDto> memberResponseDtoList = memberService.getMembersAll(firstName);
+        return SuccessResponse.responseBuilder(MemberMessage.GET_MEMBERS_ALL, HttpStatus.OK, memberResponseDtoList);
     }
-
-    @GetMapping("/getMembersName/{name}")
-    public ResponseEntity<List<MemberResponseDto>> getMembersByName(@Valid @PathVariable(value = "name", required = false) String name) {
-        List<MemberResponseDto> memberResponseDtoList = memberService.getMembersByName(name);
-        return ResponseEntity.ok().body(memberResponseDtoList);
-    }
-
 
     @GetMapping("/getMembersGender")
     public ResponseEntity<List<MemberResponseDto>> getMembersByGender(@RequestParam("gender") Gender gender) {
         List<MemberResponseDto> memberResponseDtoList = memberService.getMembersByGender(gender);
-        return ResponseEntity.ok().body(memberResponseDtoList);
+        return SuccessResponse.responseBuilder(MemberMessage.GET_MEMBERS_ALL, HttpStatus.OK, memberResponseDtoList);
+    }
+
+    @PutMapping
+    public ResponseEntity<MemberResponseDto> updateBook(@Valid @RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
+        MemberResponseDto memberResponseDto = memberService.updateBook(memberUpdateRequestDto);
+        return SuccessResponse.responseBuilder(MemberMessage.UPDATE_MEMBER, HttpStatus.CREATED, memberResponseDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBook(@PathVariable("id") long id) {
+        memberService.deleteBook(id);
+        return SuccessResponse.responseBuilder(MemberMessage.DELETE_MEMBER_BY_ID, HttpStatus.OK);
     }
 }

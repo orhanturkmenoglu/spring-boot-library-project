@@ -1,4 +1,4 @@
-package com.example.springbootlibraryproject.dto.request;
+package com.example.springbootlibraryproject.dto.updateRequest;
 
 import com.example.springbootlibraryproject.entity.Contact;
 import com.example.springbootlibraryproject.enums.Gender;
@@ -7,16 +7,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.UniqueElements;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MemberRequestDto {
+public class MemberUpdateRequestDto {
+
+    @NotNull(message = "Member id must not be null")
+    private Long id;
 
     @NotBlank(message = "Member first name must not be null or empty")
     @Length(min = 2, message = "Member first name minimum length must be 2 characters")
@@ -31,6 +33,4 @@ public class MemberRequestDto {
 
     @NotBlank(message = "Member gender must not be null or empty")
     private Gender gender;
-    
-    private Contact contact;
 }
