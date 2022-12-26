@@ -18,10 +18,7 @@ import java.time.LocalDate;
 public class BorrowerResponseDto implements Serializable {
 
     private Long id;
-    @JsonManagedReference
     private Member member;
-
-    @JsonManagedReference
     private Book book;
     private boolean status;
     private LocalDate date;

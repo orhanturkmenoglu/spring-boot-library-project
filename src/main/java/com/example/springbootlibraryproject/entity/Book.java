@@ -1,5 +1,6 @@
 package com.example.springbootlibraryproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,4 +29,8 @@ public class Book {
     private LocalDate dateOfIssue;
     private LocalDate creationDate;
     private Long amountOfStock;
+
+    @OneToOne(mappedBy = "book")
+    @JsonManagedReference
+    private Stock stock;
 }

@@ -19,6 +19,7 @@ public class SpringBootLibraryProjectApplication implements CommandLineRunner {
     private final BorrowerRepository borrowerRepository;
     private final MemberRepository memberRepository;
 
+
     public static void main(String[] args) {
         SpringApplication.run(SpringBootLibraryProjectApplication.class, args);
     }
@@ -77,5 +78,7 @@ public class SpringBootLibraryProjectApplication implements CommandLineRunner {
 				.build();
 
 		borrowerRepository.save(borrower);*/
+
+
     }
 }
