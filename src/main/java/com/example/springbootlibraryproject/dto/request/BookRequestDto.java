@@ -18,27 +18,24 @@ import java.time.LocalDate;
 public class BookRequestDto {
 
     @NotBlank(message = "Book must not be null or empty ")
-    @Length(min = 13,max = 13, message = "Book  barcode must be 13 characters")
+    @Length(min = 13, max = 13, message = "Book  barcode must be 13 characters")
     private String barcode;
 
     @NotBlank(message = "Book name must not be null or empty")
-    @Length(min = 2,message = "Book name minimum length must be 2 characters")
+    @Length(min = 2, message = "Book name minimum length must be 2 characters")
     private String name;
 
     @NotBlank(message = "Book author must not be null or empty")
-    @Length(min = 2,message = "Book author minimum length must be 2 characters")
+    @Length(min = 2, message = "Book author minimum length must be 2 characters")
     private String author;
 
     @NotBlank(message = "Book publisher must not be null or empty")
-    @Length(min = 2,message = "Book publisher minimum length must be 2 characters")
+    @Length(min = 2, message = "Book publisher minimum length must be 2 characters")
     private String publisher;
 
     @NotNull(message = "Book number of pages must be null")
-    @Min(value = 1,message = "Book number of pages must be minimum value 1")
+    @Min(value = 1, message = "Book number of pages must be minimum value 1")
     private Long numbersOfPages;
-
-    @NotNull(message = "Book date of issue must be null")
-    private LocalDate dateOfIssue;
 
     @NotNull(message = "Book creation date must be null")
     private LocalDate creationDate;

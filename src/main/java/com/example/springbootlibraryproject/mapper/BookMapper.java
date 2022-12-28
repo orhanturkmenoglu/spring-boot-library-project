@@ -25,7 +25,6 @@ public class BookMapper {
                 .author(bookRequestDto.getAuthor())
                 .publisher(bookRequestDto.getPublisher())
                 .numbersOfPages(bookRequestDto.getNumbersOfPages())
-                .dateOfIssue(bookRequestDto.getDateOfIssue())
                 .creationDate(bookRequestDto.getCreationDate())
                 .amountOfStock(bookRequestDto.getAmountOfStock())
                 .build();
@@ -39,7 +38,6 @@ public class BookMapper {
                 .author(bookUpdateRequestDto.getAuthor())
                 .publisher(bookUpdateRequestDto.getPublisher())
                 .numbersOfPages(bookUpdateRequestDto.getNumbersOfPages())
-                .dateOfIssue(bookUpdateRequestDto.getDateOfIssue())
                 .creationDate(bookUpdateRequestDto.getCreationDate())
                 .amountOfStock(bookUpdateRequestDto.getAmountOfStock())
                 .build();
@@ -53,7 +51,6 @@ public class BookMapper {
                 .author(book.getAuthor())
                 .publisher(book.getPublisher())
                 .numbersOfPages(book.getNumbersOfPages())
-                .dateOfIssue(book.getDateOfIssue())
                 .creationDate(book.getCreationDate())
                 .amountOfStock(book.getAmountOfStock())
                 .build();

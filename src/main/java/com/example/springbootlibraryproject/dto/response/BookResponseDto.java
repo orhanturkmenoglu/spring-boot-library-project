@@ -19,7 +19,6 @@ public class BookResponseDto implements Serializable {
     private String author;
     private String publisher;
     private Long numbersOfPages;
-    private LocalDate dateOfIssue;
     private LocalDate creationDate;
     private Long amountOfStock;
 }

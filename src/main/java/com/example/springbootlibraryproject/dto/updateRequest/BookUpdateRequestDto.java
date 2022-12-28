@@ -40,9 +40,6 @@ public class BookUpdateRequestDto {
     @Min(value = 1, message = "Book number of pages must be minimum value 1")
     private Long numbersOfPages;
 
-    @NotNull(message = "Book date of issue must be null")
-    private LocalDate dateOfIssue;
-
     @NotNull(message = "Book creation date must be null")
     private LocalDate creationDate;
 
