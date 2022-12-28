@@ -27,7 +27,7 @@ public class BorrowerMapper {
                 .book(Book.builder().id(borrowerRequestDto.getBookId()).build())
                 .status(borrowerRequestDto.isStatus())
                 .date(borrowerRequestDto.getDate())
-                .returnDate(borrowerRequestDto.getReturnDate())
+                .returnDate(borrowerRequestDto.getReturnDate().plusDays(15))
                 .amountBorrowed(borrowerRequestDto.getAmountBorrowed())
                 .build();
     }
@@ -35,11 +35,12 @@ public class BorrowerMapper {
     public Borrower mapToBorrower(BorrowerUpdateRequestDto borrowerUpdateRequestDto) {
         return Borrower.builder()
                 .id(borrowerUpdateRequestDto.getId())
-                .member(borrowerUpdateRequestDto.getMember())
-                .book(borrowerUpdateRequestDto.getBook())
+                .member(Member.builder().id(borrowerUpdateRequestDto.getMemberId()).build())
+                .book(Book.builder().id(borrowerUpdateRequestDto.getBookId()).build())
                 .status(borrowerUpdateRequestDto.isStatus())
                 .date(borrowerUpdateRequestDto.getDate())
                 .returnDate(borrowerUpdateRequestDto.getReturnDate())
+                .amountBorrowed(borrowerUpdateRequestDto.getAmountBorrowed())
                 .build();
     }
 

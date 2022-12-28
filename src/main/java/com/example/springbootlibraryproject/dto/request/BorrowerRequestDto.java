@@ -17,14 +17,15 @@ import java.time.LocalDate;
 public class BorrowerRequestDto {
 
     @NotNull(message = " Borrower status must not be null")
-    private boolean status;
+    @Builder.Default
+    private boolean status = false;
 
     @NotNull(message = "Borrower date must not be null")
     private LocalDate date;
 
     @NotNull(message = "Borrower return date must not be null")
     @Builder.Default
-    private LocalDate returnDate =LocalDate.now().plusDays(15);
+    private LocalDate returnDate = LocalDate.now().plusDays(15);
 
     @NotNull(message = "Borrower member  must not be null")
     private Long memberId;

@@ -28,6 +28,8 @@ public class BorrowerService {
     private final StockRepository stockRepository;
     private final StockService stockService;
 
+    private final BookService bookService;
+
     public List<BorrowerResponseDto> getBorrowersAll() {
         log.info("BorrowerService::getBorrowersAll started");
 
@@ -44,12 +46,13 @@ public class BorrowerService {
             throw new BorrowerException("The borrowed amount must be a minimum and a maximum of 1");
         }
 
-        Optional<Stock> optionalStock = getOptionalStock(borrowerRequestDto);
+        Optional<Stock> optionalStock = getOptionalBorrowerRequestStock(borrowerRequestDto);
         if (optionalStock.get().getAmountOfStock() <= 0) {
             throw new BorrowerException("The minimum value of the borrowed amount cannot be less than 0.");
         }
 
-        getUpdateStock(borrowerRequestDto, optionalStock);
+        Long amountOfStock = optionalStock.get().getAmountOfStock() - 1;
+        getUpdateStock(borrowerRequestDto.getBookId(), borrowerRequestDto.getStockId(), amountOfStock);
 
         Borrower borrower = borrowerMapper.mapToBorrower(borrowerRequestDto);
         Borrower save = borrowerRepository.save(borrower);
@@ -63,6 +66,27 @@ public class BorrowerService {
 
         Optional<Borrower> optionalBorrower = borrowerRepository.findById(borrowerUpdateRequestDto.getId());
         optionalBorrower.orElseThrow(() -> new BorrowerException("Borrower not found id : " + borrowerUpdateRequestDto.getId()));
+
+        Optional<Stock> optionalStock = getOptionalBorrowerUpdateRequestStock(borrowerUpdateRequestDto);
+
+        if (!(borrowerUpdateRequestDto.getAmountBorrowed() == 1)) {
+            throw new BorrowerException("The borrowed amount must be a minimum and a maximum of 1");
+        }
+
+        if (optionalStock.get().getAmountOfStock() <= 0) {
+            throw new BorrowerException("The minimum value of the borrowed amount cannot be less than 0.");
+        }
+
+        if (borrowerUpdateRequestDto.isStatus()) {
+            Long bookAmountOfStockCount = optionalStock.get().getBook().getAmountOfStock();
+            Long amountOfStockCount = optionalStock.get().getAmountOfStock() + 1;
+
+            if (bookAmountOfStockCount < amountOfStockCount) {
+                throw new BorrowerException("Incorrect book stock quantity");
+            }
+
+            getUpdateStock(borrowerUpdateRequestDto.getBookId(), borrowerUpdateRequestDto.getStockId(), amountOfStockCount);
+        }
 
         Borrower borrower = borrowerMapper.mapToBorrower(borrowerUpdateRequestDto);
         Borrower save = borrowerRepository.save(borrower);
@@ -81,18 +105,22 @@ public class BorrowerService {
         borrowerRepository.deleteById(id);
     }
 
-    private Optional<Stock> getOptionalStock(BorrowerRequestDto borrowerRequestDto) {
+    private Optional<Stock> getOptionalBorrowerRequestStock(BorrowerRequestDto borrowerRequestDto) {
         Optional<Stock> optionalStock = stockRepository.findById(borrowerRequestDto.getStockId());
         optionalStock.orElseThrow(() -> new StockException("Stock not found for id : " + borrowerRequestDto.getStockId()));
         return optionalStock;
     }
 
-    private void getUpdateStock(BorrowerRequestDto borrowerRequestDto, Optional<Stock> optionalStock) {
-        Long result = optionalStock.get().getAmountOfStock() - 1;
-        stockService.updateStock(StockUpdateRequestDto.builder()
-                .id(optionalStock.get().getId())
-                .bookId(borrowerRequestDto.getBookId())
-                .amountOfStock(result)
+    private Optional<Stock> getOptionalBorrowerUpdateRequestStock(BorrowerUpdateRequestDto borrowerUpdateRequestDto) {
+        Optional<Stock> optionalStock = stockRepository.findById(borrowerUpdateRequestDto.getStockId());
+        optionalStock.orElseThrow(() -> new StockException("Stock not found for id : " + borrowerUpdateRequestDto.getStockId()));
+        return optionalStock;
+    }
+
+    private void getUpdateStock(Long bookId, Long stockId, Long amountOfStock) {
+        stockService.updateStock(StockUpdateRequestDto.builder().id(stockId)
+                .bookId(bookId)
+                .amountOfStock(amountOfStock)
                 .build());
     }
 }
