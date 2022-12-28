@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class BookRequestDto {
 
     @NotBlank(message = "Book must not be null or empty ")
-    @Length(min = 11,max = 11, message = "Book  barcode must be 11 characters")
+    @Length(min = 13,max = 13, message = "Book  barcode must be 13 characters")
     private String barcode;
 
     @NotBlank(message = "Book name must not be null or empty")
