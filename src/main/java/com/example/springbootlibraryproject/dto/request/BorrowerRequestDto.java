@@ -23,7 +23,8 @@ public class BorrowerRequestDto {
     private LocalDate date;
 
     @NotNull(message = "Borrower return date must not be null")
-    private LocalDate returnDate;
+    @Builder.Default
+    private LocalDate returnDate =LocalDate.now().plusDays(15);
 
     @NotNull(message = "Borrower member  must not be null")
     private Long memberId;
