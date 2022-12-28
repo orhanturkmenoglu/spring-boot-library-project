@@ -1,5 +1,6 @@
 package com.example.springbootlibraryproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class Contact {
     private String email;
 
     @OneToOne(mappedBy = "contact")
+    @JsonManagedReference
     private Member member;
 
 }

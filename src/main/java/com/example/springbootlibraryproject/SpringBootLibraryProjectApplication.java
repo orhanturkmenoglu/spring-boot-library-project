@@ -1,9 +1,5 @@
 package com.example.springbootlibraryproject;
 
-import com.example.springbootlibraryproject.repository.BookRepository;
-import com.example.springbootlibraryproject.repository.BorrowerRepository;
-import com.example.springbootlibraryproject.repository.ContactRepository;
-import com.example.springbootlibraryproject.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,10 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringBootLibraryProjectApplication implements CommandLineRunner {
 
 
+/*
     private final BookRepository bookRepository;
     private final ContactRepository contactRepository;
     private final BorrowerRepository borrowerRepository;
     private final MemberRepository memberRepository;
+*/
 
 
     public static void main(String[] args) {
@@ -27,58 +25,58 @@ public class SpringBootLibraryProjectApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-/*		Book book1 = Book.builder()
-				.name("Bir Ömür Nasıl Yaşanır ?")
-				.amountOfStock(5L)
-				.barcode("12345678900")
-				.creationDate(LocalDate.now())
-				.numbersOfPages(285L)
-				.publisher("Kronik Yayıncılık")
-				.author("İlber Ortaylı")
-				.build();
+   /*     Book book2 = Book.builder()
+                .name("Bir Ömür Nasıl Yaşanır ?")
+                .amountOfStock(5L)
+                .barcode("12345678900")
+                .creationDate(LocalDate.now())
+                .numbersOfPages(285L)
+                .publisher("Kronik Yayıncılık")
+                .author("İlber Ortaylı")
+                .build();
 
-		bookRepository.save(book1);
-
-
-		Contact contact1 = Contact.builder()
-				.address("Gazi Mah")
-				.city("Hatay")
-				.district("Kırıkhan")
-				.email("example@example.com")
-				.phoneNumber("5417678686")
-				.build();
-
-		List<Contact> contactList = Arrays.asList(contact1);
-
-		contactRepository.saveAll(contactList);
-
-		Member member1 = Member.builder()
-				.firstName("Orhan")
-				.lastName("Türkmenoğlu")
-				.gender(Gender.MALE)
-				.identityNo("12345678900")
-				.contactList(contactList)
-				.build();
+        bookRepository.save(book2);
 
 
-		memberRepository.save(member1);
+        Contact contact2 = Contact.builder()
+                .address("Gazi Mah")
+                .city("Hatay")
+                .district("Kırıkhan")
+                .email("example@example.com")
+                .phoneNumber("5417678686")
+                .build();
+
+        List<Contact> contactList = Arrays.asList(contact2);
+
+        contactRepository.saveAll(contactList);
+
+        Member member2 = Member.builder()
+                .firstName("Orhan")
+                .lastName("Türkmenoğlu")
+                .gender(Gender.MALE)
+                .identityNo("12345678900")
+                .build();
+
+        memberRepository.save(member2);
 
 
+        contact2.setMember(member2);
+        contactRepository.saveAll(contactList);
 
-		contact1.setMember(member1);
-		contactRepository.saveAll(contactList);
+
+        Borrower borrower = Borrower.builder()
+                .book(book2)
+                .date(LocalDate.now())
+                .status(true)
+                .member(member2)
+                .returnDate(LocalDate.of(2023, 01, 15))
+                .build();
+
+        borrowerRepository.save(borrower);
 
 
-		Borrower borrower = Borrower.builder()
-				.book(book1)
-				.member(member1)
-				.date(LocalDate.now())
-				.status(false)
-				.returnDate(LocalDate.of(2022,12,29))
-				.build();
-
-		borrowerRepository.save(borrower);*/
-
+        borrowerRepository.save(borrower);
+*/
 
     }
 }

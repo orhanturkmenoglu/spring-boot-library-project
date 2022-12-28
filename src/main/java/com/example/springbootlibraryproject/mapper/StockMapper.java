@@ -2,6 +2,7 @@ package com.example.springbootlibraryproject.mapper;
 
 import com.example.springbootlibraryproject.dto.response.StockResponseDto;
 import com.example.springbootlibraryproject.dto.updateRequest.StockUpdateRequestDto;
+import com.example.springbootlibraryproject.entity.Book;
 import com.example.springbootlibraryproject.entity.Stock;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +22,15 @@ public class StockMapper {
     public Stock mapToStock(StockUpdateRequestDto stockUpdateRequestDto) {
         return Stock.builder()
                 .id(stockUpdateRequestDto.getId())
-                .book(stockUpdateRequestDto.getBook())
+                .book(Book.builder().id(stockUpdateRequestDto.getBookId()).build())
                 .amountOfStock(stockUpdateRequestDto.getAmountOfStock())
+                .build();
+    }
+
+    public Stock mapToStockResponseDto(StockResponseDto stockResponseDto) {
+        return Stock.builder()
+                .book(stockResponseDto.getBook())
+                .amountOfStock(stockResponseDto.getAmountOfStock())
                 .build();
     }
 

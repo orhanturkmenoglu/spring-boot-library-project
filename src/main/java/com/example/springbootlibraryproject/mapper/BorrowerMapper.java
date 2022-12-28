@@ -3,7 +3,9 @@ package com.example.springbootlibraryproject.mapper;
 import com.example.springbootlibraryproject.dto.request.BorrowerRequestDto;
 import com.example.springbootlibraryproject.dto.response.BorrowerResponseDto;
 import com.example.springbootlibraryproject.dto.updateRequest.BorrowerUpdateRequestDto;
+import com.example.springbootlibraryproject.entity.Book;
 import com.example.springbootlibraryproject.entity.Borrower;
+import com.example.springbootlibraryproject.entity.Member;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,11 +23,12 @@ public class BorrowerMapper {
 
     public Borrower mapToBorrower(BorrowerRequestDto borrowerRequestDto) {
         return Borrower.builder()
-                .member(borrowerRequestDto.getMember())
-                .book(borrowerRequestDto.getBook())
+                .member(Member.builder().id(borrowerRequestDto.getMemberId()).build())
+                .book(Book.builder().id(borrowerRequestDto.getBookId()).build())
                 .status(borrowerRequestDto.isStatus())
                 .date(borrowerRequestDto.getDate())
                 .returnDate(borrowerRequestDto.getReturnDate())
+                .amountBorrowed(borrowerRequestDto.getAmountBorrowed())
                 .build();
     }
 

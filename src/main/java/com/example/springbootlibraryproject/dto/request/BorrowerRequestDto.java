@@ -1,7 +1,5 @@
 package com.example.springbootlibraryproject.dto.request;
 
-import com.example.springbootlibraryproject.entity.Book;
-import com.example.springbootlibraryproject.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,16 +25,20 @@ public class BorrowerRequestDto {
     @NotNull(message = "Borrower return date must not be null")
     private LocalDate returnDate;
 
-    @NotNull(message = "Borrower member id must not be null")
-    private Member member;
+    @NotNull(message = "Borrower member  must not be null")
+    private Long memberId;
 
-    @NotNull(message = "Borrower book id must not be null")
-    private Book book;
+    @NotNull(message = "Borrower book id  must not be null")
+    private Long bookId;
+
+    @NotNull(message = "Borrower stock id must not be null")
+    private Long stockId;
 
     @NotNull(message = "Borrower amount borrowed must not be null")
 
     @Min(value = 1, message = "The borrowed amount must be a minimum and a maximum of 1")
     @Max(value = 1, message = "The borrowed amount must be a minimum and a maximum of 1")
     private Long amountBorrowed;
+
 
 }

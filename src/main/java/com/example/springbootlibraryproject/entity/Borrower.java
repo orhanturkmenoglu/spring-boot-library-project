@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.time.LocalDate;
 
 /*borrower : ödünç alan */
@@ -33,4 +35,5 @@ public class Borrower {
     @OneToOne
     private Book book;
 
+    private Long amountBorrowed;
 }

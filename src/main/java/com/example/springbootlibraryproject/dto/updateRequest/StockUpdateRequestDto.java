@@ -1,6 +1,5 @@
 package com.example.springbootlibraryproject.dto.updateRequest;
 
-import com.example.springbootlibraryproject.entity.Book;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +19,7 @@ public class StockUpdateRequestDto {
     private Long id;
 
     @NotNull(message = "Stock book id must not be null")
-    private Book book;
+    private Long bookId;
 
     @NotNull(message = "Stock amount of stock must not be null")
     private Long amountOfStock;
