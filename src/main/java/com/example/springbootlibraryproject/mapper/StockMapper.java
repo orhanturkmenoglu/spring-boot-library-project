@@ -1,5 +1,6 @@
 package com.example.springbootlibraryproject.mapper;
 
+import com.example.springbootlibraryproject.dto.request.StockRequestDto;
 import com.example.springbootlibraryproject.dto.response.StockResponseDto;
 import com.example.springbootlibraryproject.dto.updateRequest.StockUpdateRequestDto;
 import com.example.springbootlibraryproject.entity.Book;
@@ -22,8 +23,23 @@ public class StockMapper {
     public Stock mapToStock(StockUpdateRequestDto stockUpdateRequestDto) {
         return Stock.builder()
                 .id(stockUpdateRequestDto.getId())
-                .book(Book.builder().id(stockUpdateRequestDto.getBookId()).build())
+                .book(Book.builder().id(stockUpdateRequestDto.getId()).build())
                 .amountOfStock(stockUpdateRequestDto.getAmountOfStock())
+                .build();
+    }
+
+    public Stock mapToStock(StockRequestDto stockRequestDto) {
+        return Stock.builder()
+                .book(Book.builder()
+                        .name(stockRequestDto.getBook().getName())
+                        .author(stockRequestDto.getBook().getAuthor())
+                        .barcode(stockRequestDto.getBook().getBarcode())
+                        .publisher(stockRequestDto.getBook().getPublisher())
+                        .numbersOfPages(stockRequestDto.getBook().getNumbersOfPages())
+                        .creationDate(stockRequestDto.getBook().getCreationDate())
+                        .amountOfStock(stockRequestDto.getBook().getAmountOfStock())
+                        .build())
+                .amountOfStock(stockRequestDto.getAmountStock())
                 .build();
     }
 

@@ -29,9 +29,8 @@ public class Member {
 
     @Enumerated
     private Gender gender;
-    
 
-    @OneToOne(orphanRemoval = true,cascade = CascadeType.ALL,optional = true)
+    @OneToOne(cascade = CascadeType.ALL)
     @JsonBackReference
     private Contact contact;
 

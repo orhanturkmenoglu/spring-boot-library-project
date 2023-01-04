@@ -27,7 +27,7 @@ public class Borrower {
 
     private LocalDate returnDate;
 
-    @OneToOne
+    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
     private Member member;
 
     @OneToOne

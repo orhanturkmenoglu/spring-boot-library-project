@@ -26,7 +26,7 @@ public class Contact {
     private String phoneNumber;
     private String email;
 
-    @OneToOne(mappedBy = "contact")
+    @OneToOne(mappedBy = "contact",cascade = CascadeType.ALL)
     @JsonManagedReference
     private Member member;
 

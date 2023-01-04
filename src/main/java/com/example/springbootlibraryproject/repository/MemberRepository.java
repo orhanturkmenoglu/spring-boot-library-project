@@ -13,6 +13,4 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     List<Member> findMemberByFirstName(String firstName);
 
     List<Member> findByGender(Gender gender);
-
-
 }

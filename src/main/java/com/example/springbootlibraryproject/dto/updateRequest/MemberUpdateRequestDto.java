@@ -1,6 +1,5 @@
 package com.example.springbootlibraryproject.dto.updateRequest;
 
-import com.example.springbootlibraryproject.entity.Contact;
 import com.example.springbootlibraryproject.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,12 +9,13 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MemberUpdateRequestDto {
+public class MemberUpdateRequestDto implements Serializable {
 
     @NotNull(message = "Member id must not be null")
     private Long id;
@@ -31,6 +31,9 @@ public class MemberUpdateRequestDto {
     @NotBlank(message = "Member identityNo must not be null or empty")
     private String identityNo;
 
-    @NotBlank(message = "Member gender must not be null or empty")
+    /*@NotBlank(message = "Member gender must not be null or empty")*/
     private Gender gender;
+
+    private ContactUpdateRequestDto contactUpdateRequestDto;
+
 }

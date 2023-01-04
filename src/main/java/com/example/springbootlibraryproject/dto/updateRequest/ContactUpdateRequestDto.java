@@ -1,6 +1,5 @@
 package com.example.springbootlibraryproject.dto.updateRequest;
 
-import com.example.springbootlibraryproject.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,12 +10,13 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ContactUpdateRequestDto {
+public class ContactUpdateRequestDto implements Serializable {
 
     @NotNull(message = "Contact id must not be null")
     private Long id;
@@ -37,7 +37,5 @@ public class ContactUpdateRequestDto {
     @NotBlank(message = "Contact Email must not be null or empty")
     @Email(message = "Contact Email is not valid ", regexp = "^(.+)@(.+)$")
     private String email;
-
-    private Member member;
 
 }

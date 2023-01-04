@@ -1,8 +1,10 @@
 package com.example.springbootlibraryproject.mapper;
 
 import com.example.springbootlibraryproject.dto.request.MemberRequestDto;
+import com.example.springbootlibraryproject.dto.response.ContactResponseDto;
 import com.example.springbootlibraryproject.dto.response.MemberResponseDto;
 import com.example.springbootlibraryproject.dto.updateRequest.MemberUpdateRequestDto;
+import com.example.springbootlibraryproject.entity.Contact;
 import com.example.springbootlibraryproject.entity.Member;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +28,14 @@ public class MemmerMapper {
                 .lastName(memberUpdateRequestDto.getLastName())
                 .identityNo(memberUpdateRequestDto.getIdentityNo())
                 .gender(memberUpdateRequestDto.getGender())
+                .contact(Contact.builder()
+                        .id(memberUpdateRequestDto.getContactUpdateRequestDto().getId())
+                        .address(memberUpdateRequestDto.getContactUpdateRequestDto().getAddress())
+                        .city(memberUpdateRequestDto.getContactUpdateRequestDto().getCity())
+                        .district(memberUpdateRequestDto.getContactUpdateRequestDto().getDistrict())
+                        .email(memberUpdateRequestDto.getContactUpdateRequestDto().getEmail())
+                        .phoneNumber(memberUpdateRequestDto.getContactUpdateRequestDto().getPhoneNumber())
+                        .build())
                 .build();
     }
 
@@ -35,7 +45,13 @@ public class MemmerMapper {
                 .lastName(memberRequestDto.getLastName())
                 .identityNo(memberRequestDto.getIdentityNo())
                 .gender(memberRequestDto.getGender())
-                .contact(memberRequestDto.getContact())
+                .contact(Contact.builder()
+                        .address(memberRequestDto.getContact().getAddress())
+                        .city(memberRequestDto.getContact().getCity())
+                        .district(memberRequestDto.getContact().getDistrict())
+                        .email(memberRequestDto.getContact().getEmail())
+                        .phoneNumber(memberRequestDto.getContact().getPhoneNumber())
+                        .build())
                 .build();
     }
 
@@ -46,7 +62,14 @@ public class MemmerMapper {
                 .lastName(member.getLastName())
                 .identityNo(member.getIdentityNo())
                 .gender(member.getGender())
-                .contact(member.getContact())
+                .contact(ContactResponseDto.builder()
+                        .id(member.getContact().getId())
+                        .address(member.getContact().getAddress())
+                        .city(member.getContact().getCity())
+                        .district(member.getContact().getDistrict())
+                        .email(member.getContact().getEmail())
+                        .phoneNumber(member.getContact().getPhoneNumber())
+                        .build())
                 .build();
     }
 }

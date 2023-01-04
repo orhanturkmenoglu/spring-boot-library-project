@@ -1,6 +1,5 @@
 package com.example.springbootlibraryproject.dto.request;
 
-import com.example.springbootlibraryproject.entity.Book;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class StockRequestDto {
 
-    private Book book;
+    private BookRequestDto book;
 
-    private Long amountOfStock;
+    private Long amountStock;
 }

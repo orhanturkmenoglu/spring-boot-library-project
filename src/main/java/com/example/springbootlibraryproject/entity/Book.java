@@ -29,7 +29,7 @@ public class Book {
     private LocalDate creationDate;
     private Long amountOfStock;
 
-    @OneToOne(mappedBy = "book")
+    @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
     @JsonManagedReference
     private Stock stock;
 }

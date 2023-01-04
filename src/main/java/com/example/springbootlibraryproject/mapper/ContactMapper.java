@@ -4,6 +4,7 @@ import com.example.springbootlibraryproject.dto.request.ContactRequestDto;
 import com.example.springbootlibraryproject.dto.response.ContactResponseDto;
 import com.example.springbootlibraryproject.dto.updateRequest.ContactUpdateRequestDto;
 import com.example.springbootlibraryproject.entity.Contact;
+import com.example.springbootlibraryproject.entity.Member;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class ContactMapper {
                 .address(contactUpdateRequestDto.getAddress())
                 .phoneNumber(contactUpdateRequestDto.getPhoneNumber())
                 .email(contactUpdateRequestDto.getEmail())
-                .member(contactUpdateRequestDto.getMember())
+                .member(Member.builder().build())
                 .build();
     }
 

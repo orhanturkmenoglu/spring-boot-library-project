@@ -1,6 +1,5 @@
 package com.example.springbootlibraryproject.dto.request;
 
-import com.example.springbootlibraryproject.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +8,6 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
@@ -34,4 +32,5 @@ public class ContactRequestDto {
     @NotBlank(message = "Contact Email must not be null or empty")
     @Email(message = "Contact Email is not valid ", regexp = "^(.+)@(.+)$")
     private String email;
+
 }

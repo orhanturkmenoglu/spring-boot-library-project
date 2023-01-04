@@ -1,15 +1,12 @@
 package com.example.springbootlibraryproject.dto.request;
 
-import com.example.springbootlibraryproject.entity.Contact;
 import com.example.springbootlibraryproject.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.UniqueElements;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 
 @Data
@@ -32,5 +29,5 @@ public class MemberRequestDto {
     @NotBlank(message = "Member gender must not be null or empty")
     private Gender gender;
     
-    private Contact contact;
+    private ContactRequestDto contact;
 }

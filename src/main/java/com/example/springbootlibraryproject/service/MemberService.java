@@ -5,7 +5,6 @@ import com.example.springbootlibraryproject.dto.response.MemberResponseDto;
 import com.example.springbootlibraryproject.dto.updateRequest.MemberUpdateRequestDto;
 import com.example.springbootlibraryproject.entity.Member;
 import com.example.springbootlibraryproject.enums.Gender;
-import com.example.springbootlibraryproject.exceptions.BookException;
 import com.example.springbootlibraryproject.exceptions.MemberException;
 import com.example.springbootlibraryproject.mapper.MemmerMapper;
 import com.example.springbootlibraryproject.repository.MemberRepository;
@@ -67,8 +66,8 @@ public class MemberService {
         return memmerMapper.mapToMemberResponseDtoList(memberList);
     }
 
-    public MemberResponseDto updateBook(MemberUpdateRequestDto memberUpdateRequestDto) {
-        log.info("MemberService::updateBook started");
+    public MemberResponseDto updateMember(MemberUpdateRequestDto memberUpdateRequestDto) {
+        log.info("MemberService::updateMember started");
 
         Optional<Member> optionalMember = memberRepository.findById(memberUpdateRequestDto.getId());
         optionalMember.orElseThrow(() -> new MemberException("Member not found id : " + memberUpdateRequestDto.getId()));
@@ -76,17 +75,17 @@ public class MemberService {
         Member member = memmerMapper.mapToMember(memberUpdateRequestDto);
         Member save = memberRepository.save(member);
 
-        log.info("MemberService::updateBook finished");
+        log.info("MemberService::updateMember finished");
         return memmerMapper.mapToMemberResponseDto(save);
     }
 
-    public void deleteBook(long id) {
-        log.info("MemberService::deleteBook started");
+    public void deleteMember(long id) {
+        log.info("MemberService::deleteMember started");
 
         Optional<Member> optionalMember = memberRepository.findById(id);
         optionalMember.orElseThrow(() -> new MemberException("Member not found id : " + id));
 
-        log.info("BookService::deleteBook finished");
+        log.info("BookService::deleteMember finished");
         memberRepository.deleteById(id);
     }
 

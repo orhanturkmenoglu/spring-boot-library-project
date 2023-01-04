@@ -23,4 +23,5 @@ public class StockUpdateRequestDto {
 
     @NotNull(message = "Stock amount of stock must not be null")
     private Long amountOfStock;
+
 }

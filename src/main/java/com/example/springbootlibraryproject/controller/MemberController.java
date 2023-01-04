@@ -49,14 +49,14 @@ public class MemberController {
     }
 
     @PutMapping
-    public ResponseEntity<MemberResponseDto> updateBook(@Valid @RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
-        MemberResponseDto memberResponseDto = memberService.updateBook(memberUpdateRequestDto);
+    public ResponseEntity<MemberResponseDto> updateMember(@Valid @RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
+        MemberResponseDto memberResponseDto = memberService.updateMember(memberUpdateRequestDto);
         return SuccessResponse.responseBuilder(MemberMessage.UPDATE_MEMBER, HttpStatus.CREATED, memberResponseDto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBook(@PathVariable("id") long id) {
-        memberService.deleteBook(id);
+    public ResponseEntity<Void> deleteMember(@PathVariable("id") long id) {
+        memberService.deleteMember(id);
         return SuccessResponse.responseBuilder(MemberMessage.DELETE_MEMBER_BY_ID, HttpStatus.OK);
     }
 }
