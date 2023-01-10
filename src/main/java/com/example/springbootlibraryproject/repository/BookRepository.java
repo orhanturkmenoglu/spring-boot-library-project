@@ -23,6 +23,4 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByAmountOfStockGreaterThanEqualOrderByNameAsc(long amountOfStock);
 
     List<Book> findByAmountOfStockGreaterThanEqualOrderByNameDesc(long amountOfStock);
-
-
 }

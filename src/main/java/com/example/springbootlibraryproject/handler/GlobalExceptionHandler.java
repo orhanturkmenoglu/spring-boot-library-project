@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
     @ExceptionHandler(MemberException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<MemberErrorResponse> handleException(MemberException memberException, HttpServletRequest servletRequest) {
@@ -54,6 +55,4 @@ public class GlobalExceptionHandler {
                 .build();
         return ResponseEntity.badRequest().body(errorException);
     }
-
-
 }

@@ -18,5 +18,4 @@ public class MemberErrorResponse {
     private String error;
     private LocalDateTime timestamp;
     private String path;
-
 }

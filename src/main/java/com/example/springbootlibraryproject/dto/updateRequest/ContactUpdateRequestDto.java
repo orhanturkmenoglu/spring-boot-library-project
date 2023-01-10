@@ -6,10 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 @Data
@@ -30,12 +28,4 @@ public class ContactUpdateRequestDto implements Serializable {
     @NotBlank(message = "Contact address not be null")
     @Length(max = 255, message = "Contact address maximum length must be 255 characters")
     private String address;
-
-    @Pattern(regexp = "^(\\+)?(90)?(5\\d{2})(\\d{3})(\\d{2})(\\d{2})$", message = "Phone Number is not valid ")
-    private String phoneNumber;
-
-    @NotBlank(message = "Contact Email must not be null or empty")
-    @Email(message = "Contact Email is not valid ", regexp = "^(.+)@(.+)$")
-    private String email;
-
 }

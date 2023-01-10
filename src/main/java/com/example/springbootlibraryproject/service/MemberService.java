@@ -85,8 +85,9 @@ public class MemberService {
         Optional<Member> optionalMember = memberRepository.findById(id);
         optionalMember.orElseThrow(() -> new MemberException("Member not found id : " + id));
 
-        log.info("BookService::deleteMember finished");
+
         memberRepository.deleteById(id);
+        log.info("BookService::deleteMember finished");
     }
 
 }

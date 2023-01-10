@@ -2,7 +2,6 @@ package com.example.springbootlibraryproject.dto.response;
 
 import com.example.springbootlibraryproject.entity.Book;
 import com.example.springbootlibraryproject.entity.Member;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,5 +22,4 @@ public class BorrowerResponseDto implements Serializable {
     private boolean status;
     private LocalDate date;
     private LocalDate returnDate;
-
 }

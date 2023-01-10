@@ -9,13 +9,14 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BookRequestDto {
+public class BookRequestDto implements Serializable {
 
     @NotBlank(message = "Book must not be null or empty ")
     @Length(min = 13, max = 13, message = "Book  barcode must be 13 characters")

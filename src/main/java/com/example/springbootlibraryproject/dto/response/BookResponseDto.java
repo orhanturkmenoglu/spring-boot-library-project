@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class BookResponseDto implements Serializable {
+    
     private Long id;
     private String barcode;
     private String name;
@@ -21,4 +22,6 @@ public class BookResponseDto implements Serializable {
     private Long numbersOfPages;
     private LocalDate creationDate;
     private Long amountOfStock;
+
+    private StockResponseDto stockResponseDto;
 }

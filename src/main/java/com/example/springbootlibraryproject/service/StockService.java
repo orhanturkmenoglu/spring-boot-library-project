@@ -11,8 +11,8 @@ import com.example.springbootlibraryproject.repository.StockRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +43,6 @@ public class StockService {
         log.info("StockService::createStock finished");
         return stockMapper.mapToStockResponseDto(save);
     }
-
 
     public List<StockResponseDto> getStocksAll() {
         log.info("StockService::getStocksAll started");

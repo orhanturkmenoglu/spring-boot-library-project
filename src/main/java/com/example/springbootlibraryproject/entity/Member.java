@@ -1,7 +1,6 @@
 package com.example.springbootlibraryproject.entity;
 
 import com.example.springbootlibraryproject.enums.Gender;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,8 +29,10 @@ public class Member {
     @Enumerated
     private Gender gender;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Contact contact;
+    private String phoneNumber;
+    private String email;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "contact_id", referencedColumnName = "id")
+    private Contact contact;
 }

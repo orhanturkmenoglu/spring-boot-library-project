@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-/*borrower : ödünç alan */
 @Entity
 @Table(name = "borrowers")
 @Data
@@ -27,7 +26,7 @@ public class Borrower {
 
     private LocalDate returnDate;
 
-    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToOne
     private Member member;
 
     @OneToOne

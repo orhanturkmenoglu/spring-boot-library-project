@@ -1,6 +1,5 @@
 package com.example.springbootlibraryproject.service;
 
-import com.example.springbootlibraryproject.dto.request.ContactRequestDto;
 import com.example.springbootlibraryproject.dto.response.ContactResponseDto;
 import com.example.springbootlibraryproject.dto.updateRequest.ContactUpdateRequestDto;
 import com.example.springbootlibraryproject.entity.Contact;
@@ -25,16 +24,6 @@ public class ContactService {
 
     private final ContactMapper contactMapper;
 
-    public ContactResponseDto createContact(ContactRequestDto contactRequestDto) {
-        log.info("ContactService::createContact started");
-
-        Contact contact = contactMapper.mapToContact(contactRequestDto);
-        Contact save = contactRepository.save(contact);
-
-        log.info("ContactService::createContact finished");
-        return contactMapper.mapToContactResponseDto(save);
-    }
-
     public List<ContactResponseDto> getContactsAll() {
         log.info("ContactService::getContactsAll started");
 
@@ -57,15 +46,13 @@ public class ContactService {
         return contactMapper.mapToContactResponseDto(save);
     }
 
-    public void deleteBook(long id) {
-        log.info("ContactService::deleteBook started");
+    public void deleteContact(long id) {
+        log.info("ContactService::deleteContact started");
 
         Optional<Contact> optionalContact = contactRepository.findById(id);
         optionalContact.orElseThrow(() -> new ContactException("Contact not found id : " + id));
 
-        log.info("ContactService::deleteBook finished");
         contactRepository.deleteById(id);
+        log.info("ContactService::deleteContact finished");
     }
-
-
 }

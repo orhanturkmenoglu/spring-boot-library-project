@@ -2,8 +2,10 @@ package com.example.springbootlibraryproject.mapper;
 
 import com.example.springbootlibraryproject.dto.request.BookRequestDto;
 import com.example.springbootlibraryproject.dto.response.BookResponseDto;
+import com.example.springbootlibraryproject.dto.response.StockResponseDto;
 import com.example.springbootlibraryproject.dto.updateRequest.BookUpdateRequestDto;
 import com.example.springbootlibraryproject.entity.Book;
+import com.example.springbootlibraryproject.entity.Stock;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,6 +29,9 @@ public class BookMapper {
                 .numbersOfPages(bookRequestDto.getNumbersOfPages())
                 .creationDate(bookRequestDto.getCreationDate())
                 .amountOfStock(bookRequestDto.getAmountOfStock())
+                .stock(Stock.builder()
+                        .amountOfStock(bookRequestDto.getAmountOfStock())
+                        .build())
                 .build();
     }
 
@@ -40,6 +45,10 @@ public class BookMapper {
                 .numbersOfPages(bookUpdateRequestDto.getNumbersOfPages())
                 .creationDate(bookUpdateRequestDto.getCreationDate())
                 .amountOfStock(bookUpdateRequestDto.getAmountOfStock())
+                .stock(Stock.builder()
+                        .id(bookUpdateRequestDto.getStockUpdateRequestDto().getId())
+                        .amountOfStock(bookUpdateRequestDto.getStockUpdateRequestDto().getAmountOfStock())
+                        .build())
                 .build();
     }
 
@@ -53,6 +62,9 @@ public class BookMapper {
                 .numbersOfPages(book.getNumbersOfPages())
                 .creationDate(book.getCreationDate())
                 .amountOfStock(book.getAmountOfStock())
+                .stockResponseDto(StockResponseDto.builder()
+                        .amountOfStock(book.getAmountOfStock())
+                        .build())
                 .build();
     }
 

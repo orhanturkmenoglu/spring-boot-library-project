@@ -4,7 +4,6 @@ import com.example.springbootlibraryproject.dto.request.ContactRequestDto;
 import com.example.springbootlibraryproject.dto.response.ContactResponseDto;
 import com.example.springbootlibraryproject.dto.updateRequest.ContactUpdateRequestDto;
 import com.example.springbootlibraryproject.entity.Contact;
-import com.example.springbootlibraryproject.entity.Member;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -25,8 +24,6 @@ public class ContactMapper {
                 .city(contactRequestDto.getCity())
                 .district(contactRequestDto.getDistrict())
                 .address(contactRequestDto.getAddress())
-                .phoneNumber(contactRequestDto.getPhoneNumber())
-                .email(contactRequestDto.getEmail())
                 .build();
     }
 
@@ -36,12 +33,8 @@ public class ContactMapper {
                 .city(contactUpdateRequestDto.getCity())
                 .district(contactUpdateRequestDto.getDistrict())
                 .address(contactUpdateRequestDto.getAddress())
-                .phoneNumber(contactUpdateRequestDto.getPhoneNumber())
-                .email(contactUpdateRequestDto.getEmail())
-                .member(Member.builder().build())
                 .build();
     }
-
 
     public ContactResponseDto mapToContactResponseDto(Contact contact) {
         return ContactResponseDto.builder()
@@ -49,9 +42,6 @@ public class ContactMapper {
                 .city(contact.getCity())
                 .district(contact.getDistrict())
                 .address(contact.getAddress())
-                .phoneNumber(contact.getPhoneNumber())
-                .email(contact.getEmail())
-                .member(contact.getMember())
                 .build();
     }
 }

@@ -8,13 +8,14 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BorrowerUpdateRequestDto {
+public class BorrowerUpdateRequestDto implements Serializable {
 
     @NotNull(message = "Borrower id must not be null")
     private Long id;

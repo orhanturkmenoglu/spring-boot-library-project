@@ -3,18 +3,18 @@ package com.example.springbootlibraryproject.service;
 import com.example.springbootlibraryproject.dto.request.BookRequestDto;
 import com.example.springbootlibraryproject.dto.response.BookResponseDto;
 import com.example.springbootlibraryproject.dto.updateRequest.BookUpdateRequestDto;
+import com.example.springbootlibraryproject.entity.Book;
 import com.example.springbootlibraryproject.exceptions.BookException;
 import com.example.springbootlibraryproject.mapper.BookMapper;
 import com.example.springbootlibraryproject.repository.BookRepository;
-import com.example.springbootlibraryproject.entity.Book;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -25,10 +25,7 @@ import java.util.Optional;
 @Transactional
 public class BookService {
 
-    // crud operations create read update delete
-
     private final BookRepository bookRepository;
-
     private final BookMapper bookMapper;
 
     public BookResponseDto createBook(BookRequestDto bookRequestDto) {
@@ -138,8 +135,7 @@ public class BookService {
         Optional<Book> optionalBook = bookRepository.findById(id);
         optionalBook.orElseThrow(() -> new BookException("Book not found id : " + id));
 
-        log.info("BookService::deleteBook finished");
         bookRepository.deleteById(id);
+        log.info("BookService::deleteBook finished");
     }
-
 }

@@ -20,6 +20,7 @@ import com.example.springbootlibraryproject.repository.StockRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class BorrowerService {
 
     private final BorrowerRepository borrowerRepository;
@@ -76,7 +78,6 @@ public class BorrowerService {
         return borrowerMapper.mapToBorrowerResponseDto(save);
     }
 
-
     public BorrowerResponseDto updateBorrower(BorrowerUpdateRequestDto borrowerUpdateRequestDto) {
         log.info("BorrowerService::updateBook started.");
 
@@ -96,22 +97,22 @@ public class BorrowerService {
             throw new BorrowerException("The minimum value of the borrowed amount cannot be less than 0.");
         }
 
-        Long numberOfAvailableStocks = optionalStock.get().getBook().getAmountOfStock();
+        Long amountOfStock = optionalStock.get().getAmountOfStock();
         Long newStockCount = optionalStock.get().getAmountOfStock() + 1;
+
+        if (amountOfStock < newStockCount) {
+            throw new BorrowerException("Incorrect book stock quantity.");
+        }
 
         if (!borrowerUpdateRequestDto.isStatus()) {
             getUpdateStock(borrowerUpdateRequestDto.getBookId(), borrowerUpdateRequestDto.getStockId(), newStockCount);
-        }
-
-        if (numberOfAvailableStocks < newStockCount) {
-            throw new BorrowerException("Incorrect book stock quantity.");
         }
 
         Borrower save = getBorrowerSave(borrowerMapper.mapToBorrower(borrowerUpdateRequestDto));
 
         getUpdateStock(borrowerUpdateRequestDto.getBookId(),
                 borrowerUpdateRequestDto.getStockId(),
-                (numberOfAvailableStocks - 1));
+                (amountOfStock - 1));
 
 
         log.info("BookService::updateBook finished.");
@@ -129,8 +130,8 @@ public class BorrowerService {
 
         checkOptionalBorrowerById(id);
 
-        log.info("BorrowerService::deleteBook finished.");
         borrowerRepository.deleteById(id);
+        log.info("BorrowerService::deleteBook finished.");
     }
 
     private void checkOptionalBorrowerById(Long borrowerId) {
@@ -155,7 +156,8 @@ public class BorrowerService {
     }
 
     private void getUpdateStock(Long bookId, Long stockId, Long amountOfStock) {
-        stockService.updateStock(StockUpdateRequestDto.builder().id(stockId)
+        stockService.updateStock(StockUpdateRequestDto.builder()
+                .id(stockId)
                 .bookId(bookId)
                 .amountOfStock(amountOfStock)
                 .build());

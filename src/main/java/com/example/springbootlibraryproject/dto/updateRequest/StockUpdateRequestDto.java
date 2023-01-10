@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Component
-public class StockUpdateRequestDto {
+public class StockUpdateRequestDto implements Serializable {
 
     @NotNull(message = "Stock id must not be null")
     private Long id;
@@ -23,5 +24,4 @@ public class StockUpdateRequestDto {
 
     @NotNull(message = "Stock amount of stock must not be null")
     private Long amountOfStock;
-
 }

@@ -1,7 +1,6 @@
 package com.example.springbootlibraryproject.controller;
 
 import com.example.springbootlibraryproject.constants.ContactMessage;
-import com.example.springbootlibraryproject.dto.request.ContactRequestDto;
 import com.example.springbootlibraryproject.dto.response.ContactResponseDto;
 import com.example.springbootlibraryproject.dto.updateRequest.ContactUpdateRequestDto;
 import com.example.springbootlibraryproject.exceptions.SuccessResponse;
@@ -23,12 +22,6 @@ public class ContactController {
 
     private final ContactService contactService;
 
-    @PostMapping
-    public ResponseEntity<ContactResponseDto> createContact(@Valid @RequestBody ContactRequestDto contactRequestDto) {
-        ContactResponseDto contactResponseDto = contactService.createContact(contactRequestDto);
-        return SuccessResponse.responseBuilder(ContactMessage.CREATE_CONTACT, HttpStatus.CREATED, contactResponseDto);
-    }
-
     @GetMapping
     public ResponseEntity<List<ContactResponseDto>> getContactsAll() {
         List<ContactResponseDto> contactResponseDtoList = contactService.getContactsAll();
@@ -42,9 +35,8 @@ public class ContactController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBook(@PathVariable("id") long id) {
-        contactService.deleteBook(id);
+    public ResponseEntity<Void> deleteContact(@PathVariable("id") long id) {
+        contactService.deleteContact(id);
         return SuccessResponse.responseBuilder(ContactMessage.DELETE_CONTACT_BY_ID, HttpStatus.OK);
     }
-
 }

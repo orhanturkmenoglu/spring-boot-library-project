@@ -8,17 +8,17 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BorrowerRequestDto {
+public class BorrowerRequestDto implements Serializable {
 
     @NotNull(message = " Borrower status must not be null")
-    @Builder.Default
-    private boolean status = false;
+    private boolean status;
 
     @NotNull(message = "Borrower date must not be null")
     private LocalDate date;
@@ -41,6 +41,4 @@ public class BorrowerRequestDto {
     @Min(value = 1, message = "The borrowed amount must be a minimum and a maximum of 1")
     @Max(value = 1, message = "The borrowed amount must be a minimum and a maximum of 1")
     private Long amountBorrowed;
-
-
 }

@@ -9,19 +9,20 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BookUpdateRequestDto {
+public class BookUpdateRequestDto implements Serializable {
 
     @NotNull(message = "Book id must not be null")
     private Long id;
 
     @NotBlank(message = "Book must not be null or empty ")
-    @Length(min = 11, max = 11, message = "Book  barcode must be 11 characters")
+    @Length(min = 13, max = 13, message = "Book  barcode must be 13 characters")
     private String barcode;
 
     @NotBlank(message = "Book name must not be null or empty")
@@ -45,4 +46,6 @@ public class BookUpdateRequestDto {
 
     @NotNull(message = "Book amount of stock  must be null")
     private Long amountOfStock;
+
+    private StockUpdateRequestDto stockUpdateRequestDto;
 }

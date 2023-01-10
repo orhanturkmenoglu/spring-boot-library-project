@@ -19,5 +19,7 @@ public class MemberResponseDto implements Serializable {
     private String lastName;
     private String identityNo;
     private Gender gender;
+    private String phoneNumber;
+    private String email;
     private ContactResponseDto contact;
 }
