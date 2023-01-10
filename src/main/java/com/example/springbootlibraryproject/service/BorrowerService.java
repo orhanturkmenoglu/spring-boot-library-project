@@ -60,7 +60,7 @@ public class BorrowerService {
             throw new BorrowerException("The state cannot be set to false while borrowing.");
         }
 
-        if (!(borrowerRequestDto.getAmountBorrowed() == 1)) {
+        if ((borrowerRequestDto.getAmountBorrowed() != 1)) {
             throw new BorrowerException("The borrowed amount must be a minimum and a maximum of 1.");
         }
 
@@ -89,7 +89,7 @@ public class BorrowerService {
 
         Optional<Stock> optionalStock = checkOptionalStockId(borrowerUpdateRequestDto.getStockId());
 
-        if (!(borrowerUpdateRequestDto.getAmountBorrowed() == 1)) {
+        if ((borrowerUpdateRequestDto.getAmountBorrowed() != 1)) {
             throw new BorrowerException("The borrowed amount must be a minimum and a maximum of 1.");
         }
 

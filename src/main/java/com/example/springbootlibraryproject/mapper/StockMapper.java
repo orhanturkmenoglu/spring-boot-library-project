@@ -31,13 +31,6 @@ public class StockMapper {
                 .amountOfStock(stockRequestDto.getBook().getAmountOfStock())
                 .build();
     }
-
-    public Stock mapToStockResponseDto(StockResponseDto stockResponseDto) {
-        return Stock.builder()
-                .amountOfStock(stockResponseDto.getAmountOfStock())
-                .build();
-    }
-
     public StockResponseDto mapToStockResponseDto(Stock stock) {
         return StockResponseDto.builder()
                 .amountOfStock(stock.getAmountOfStock())

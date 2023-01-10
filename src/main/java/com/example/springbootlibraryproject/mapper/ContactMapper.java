@@ -1,6 +1,5 @@
 package com.example.springbootlibraryproject.mapper;
 
-import com.example.springbootlibraryproject.dto.request.ContactRequestDto;
 import com.example.springbootlibraryproject.dto.response.ContactResponseDto;
 import com.example.springbootlibraryproject.dto.updateRequest.ContactUpdateRequestDto;
 import com.example.springbootlibraryproject.entity.Contact;
@@ -17,14 +16,6 @@ public class ContactMapper {
                 .stream()
                 .map(this::mapToContactResponseDto)
                 .collect(Collectors.toList());
-    }
-
-    public Contact mapToContact(ContactRequestDto contactRequestDto) {
-        return Contact.builder()
-                .city(contactRequestDto.getCity())
-                .district(contactRequestDto.getDistrict())
-                .address(contactRequestDto.getAddress())
-                .build();
     }
 
     public Contact mapToContact(ContactUpdateRequestDto contactUpdateRequestDto) {
