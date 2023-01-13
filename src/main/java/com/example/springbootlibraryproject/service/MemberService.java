@@ -11,6 +11,9 @@ import com.example.springbootlibraryproject.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +38,7 @@ public class MemberService {
         return memmerMapper.mapToMemberResponseDto(save);
     }
 
+    @Cacheable(value = "member")
     public List<MemberResponseDto> getMembersAll(String firstName) {
         log.info("MemberService::getMembersAll started");
 
@@ -51,7 +55,7 @@ public class MemberService {
         return memmerMapper.mapToMemberResponseDtoList(memberList);
     }
 
-
+    @Cacheable(value = "member", key = "#gender")
     public List<MemberResponseDto> getMembersByGender(Gender gender) {
         log.info("MemberService::getMembersByGender started");
 
@@ -66,6 +70,7 @@ public class MemberService {
         return memmerMapper.mapToMemberResponseDtoList(memberList);
     }
 
+    @CachePut(value = "member", key = "#memberUpdateRequestDto")
     public MemberResponseDto updateMember(MemberUpdateRequestDto memberUpdateRequestDto) {
         log.info("MemberService::updateMember started");
 
@@ -79,6 +84,7 @@ public class MemberService {
         return memmerMapper.mapToMemberResponseDto(save);
     }
 
+    @CacheEvict(value = "member", key = "#id")
     public void deleteMember(long id) {
         log.info("MemberService::deleteMember started");
 

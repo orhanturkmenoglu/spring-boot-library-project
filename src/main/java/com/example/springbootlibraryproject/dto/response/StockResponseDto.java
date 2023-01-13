@@ -13,5 +13,6 @@ import java.io.Serializable;
 @Builder
 public class StockResponseDto implements Serializable {
 
+    private Long id;
     private Long amountOfStock;
 }

@@ -45,10 +45,10 @@ public class BookMapper {
                 .numbersOfPages(bookUpdateRequestDto.getNumbersOfPages())
                 .creationDate(bookUpdateRequestDto.getCreationDate())
                 .amountOfStock(bookUpdateRequestDto.getAmountOfStock())
-                .stock(Stock.builder()
+                /*.stock(Stock.builder()
                         .id(bookUpdateRequestDto.getStockUpdateRequestDto().getId())
-                        .amountOfStock(bookUpdateRequestDto.getStockUpdateRequestDto().getAmountOfStock())
-                        .build())
+                        .amountOfStock(bookUpdateRequestDto.getAmountOfStock())
+                        .build())*/
                 .build();
     }
 
@@ -63,6 +63,7 @@ public class BookMapper {
                 .creationDate(book.getCreationDate())
                 .amountOfStock(book.getAmountOfStock())
                 .stockResponseDto(StockResponseDto.builder()
+                        .id(book.getId())
                         .amountOfStock(book.getAmountOfStock())
                         .build())
                 .build();

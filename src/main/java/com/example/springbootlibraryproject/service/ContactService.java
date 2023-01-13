@@ -8,6 +8,9 @@ import com.example.springbootlibraryproject.mapper.ContactMapper;
 import com.example.springbootlibraryproject.repository.ContactRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +27,7 @@ public class ContactService {
 
     private final ContactMapper contactMapper;
 
+    @Cacheable(value = "contact")
     public List<ContactResponseDto> getContactsAll() {
         log.info("ContactService::getContactsAll started");
 
@@ -33,6 +37,7 @@ public class ContactService {
         return contactMapper.mapToContactResponseDtoList(contactList);
     }
 
+    @CachePut(value = "contact",key = "#contactUpdateRequestDto")
     public ContactResponseDto updateBook(ContactUpdateRequestDto contactUpdateRequestDto) {
         log.info("ContactService::updateBook started");
 
@@ -46,6 +51,7 @@ public class ContactService {
         return contactMapper.mapToContactResponseDto(save);
     }
 
+    @CacheEvict(value = "contact",key = "#id")
     public void deleteContact(long id) {
         log.info("ContactService::deleteContact started");
 

@@ -19,6 +19,9 @@ import com.example.springbootlibraryproject.repository.MemberRepository;
 import com.example.springbootlibraryproject.repository.StockRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,15 +40,6 @@ public class BorrowerService {
     private final StockService stockService;
     private final MemberRepository memberRepository;
     private final BookRepository bookRepository;
-
-    public List<BorrowerResponseDto> getBorrowersAll() {
-        log.info("BorrowerService::getBorrowersAll started");
-
-        List<Borrower> borrowerList = borrowerRepository.findAll();
-
-        log.info("BorrowerService::getBorrowersAll finished.");
-        return borrowerMapper.mapToBorrowerResponseDtoList(borrowerList);
-    }
 
     public BorrowerResponseDto createBorrower(BorrowerRequestDto borrowerRequestDto) {
         log.info("BorrowerService::createBorrower started");
@@ -78,6 +72,17 @@ public class BorrowerService {
         return borrowerMapper.mapToBorrowerResponseDto(save);
     }
 
+    @Cacheable(value = "borrower")
+    public List<BorrowerResponseDto> getBorrowersAll() {
+        log.info("BorrowerService::getBorrowersAll started");
+
+        List<Borrower> borrowerList = borrowerRepository.findAll();
+
+        log.info("BorrowerService::getBorrowersAll finished.");
+        return borrowerMapper.mapToBorrowerResponseDtoList(borrowerList);
+    }
+
+    @CachePut(value = "borrower", key = "#borrowerUpdateRequestDto")
     public BorrowerResponseDto updateBorrower(BorrowerUpdateRequestDto borrowerUpdateRequestDto) {
         log.info("BorrowerService::updateBook started.");
 
@@ -119,12 +124,7 @@ public class BorrowerService {
         return borrowerMapper.mapToBorrowerResponseDto(save);
     }
 
-    private Borrower getBorrowerSave(Borrower borrowerMapper) {
-        Borrower borrower = borrowerMapper;
-        Borrower save = borrowerRepository.save(borrower);
-        return save;
-    }
-
+    @CacheEvict(value = "borrower", key = "#id")
     public void deleteBook(long id) {
         log.info("BorrowerService::deleteBook started.");
 
@@ -133,6 +133,13 @@ public class BorrowerService {
         borrowerRepository.deleteById(id);
         log.info("BorrowerService::deleteBook finished.");
     }
+
+    private Borrower getBorrowerSave(Borrower borrowerMapper) {
+        Borrower borrower = borrowerMapper;
+        Borrower save = borrowerRepository.save(borrower);
+        return save;
+    }
+
 
     private void checkOptionalBorrowerById(Long borrowerId) {
         Optional<Borrower> optionalBorrower = borrowerRepository.findById(borrowerId);
@@ -158,7 +165,7 @@ public class BorrowerService {
     private void getUpdateStock(Long bookId, Long stockId, Long amountOfStock) {
         stockService.updateStock(StockUpdateRequestDto.builder()
                 .id(stockId)
-                .bookId(bookId)
+                /*  .bookId(bookId)*/
                 .amountOfStock(amountOfStock)
                 .build());
     }

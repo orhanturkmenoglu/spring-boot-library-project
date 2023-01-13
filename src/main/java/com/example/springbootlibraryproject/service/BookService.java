@@ -10,6 +10,9 @@ import com.example.springbootlibraryproject.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -38,6 +41,7 @@ public class BookService {
         return bookMapper.mapToBookResponseDto(save);
     }
 
+    @Cacheable(value = "book")
     public List<BookResponseDto> getBooksAll() {
         log.info("BookService::getBooksAll started");
 
@@ -47,6 +51,7 @@ public class BookService {
         return bookMapper.mapToBookResponseDtoList(bookList);
     }
 
+    @Cacheable(value = "book", key = "#name")
     public List<BookResponseDto> getBooksByName(String name, String sortBy, int page, int pageSize) {
         log.info("BookService::getBooksByName started");
 
@@ -116,6 +121,7 @@ public class BookService {
         return bookMapper.mapToBookResponseDtoList(bookList);
     }
 
+    @CachePut(value = "book", key = "#bookUpdateRequestDto")
     public BookResponseDto updateBook(BookUpdateRequestDto bookUpdateRequestDto) {
         log.info("BookService::updateBook started");
 
@@ -129,6 +135,7 @@ public class BookService {
         return bookMapper.mapToBookResponseDto(save);
     }
 
+    @CacheEvict(value = "book", key = "#id")
     public void deleteBook(long id) {
         log.info("BookService::deleteBook started");
 

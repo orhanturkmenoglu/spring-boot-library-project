@@ -19,9 +19,6 @@ public class StockUpdateRequestDto implements Serializable {
     @NotNull(message = "Stock id must not be null")
     private Long id;
 
-    @NotNull(message = "Stock book id must not be null")
-    private Long bookId;
-
     @NotNull(message = "Stock amount of stock must not be null")
     private Long amountOfStock;
 }
