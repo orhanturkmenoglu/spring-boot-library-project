@@ -10,6 +10,8 @@ import com.example.springbootlibraryproject.mapper.StockMapper;
 import com.example.springbootlibraryproject.repository.StockRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -44,6 +46,7 @@ public class StockService {
         return stockMapper.mapToStockResponseDto(save);
     }
 
+    @Cacheable(value = "stock")
     public List<StockResponseDto> getStocksAll() {
         log.info("StockService::getStocksAll started");
 
@@ -53,6 +56,7 @@ public class StockService {
         return stockMapper.mapToStockResponseDtoList(stockList);
     }
 
+    @CachePut(value = "stock",key = "#stockUpdateRequestDto")
     public StockResponseDto updateStock(StockUpdateRequestDto stockUpdateRequestDto) {
         log.info("StockService::updateStock started");
 
