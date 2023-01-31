@@ -30,9 +30,6 @@ public class Book {
     private Long amountOfStock;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Image image;
-
-    @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
     private Stock stock;
 }

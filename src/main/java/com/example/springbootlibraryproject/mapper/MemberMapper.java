@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class MemmerMapper {
+public class MemberMapper {
 
     public List<MemberResponseDto> mapToMemberResponseDtoList(List<Member> memberList) {
         return memberList

@@ -47,5 +47,5 @@ public class BookUpdateRequestDto implements Serializable {
     @NotNull(message = "Book amount of stock  must be null")
     private Long amountOfStock;
 
-    private ImageUpdateRequestDto imageUpdateRequestDto;
+   /* private StockUpdateRequestDto stockUpdateRequestDto;*/
 }

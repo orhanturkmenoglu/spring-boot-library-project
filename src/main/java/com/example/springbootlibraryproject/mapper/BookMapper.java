@@ -2,11 +2,9 @@ package com.example.springbootlibraryproject.mapper;
 
 import com.example.springbootlibraryproject.dto.request.BookRequestDto;
 import com.example.springbootlibraryproject.dto.response.BookResponseDto;
-import com.example.springbootlibraryproject.dto.response.ImageResponseDto;
 import com.example.springbootlibraryproject.dto.response.StockResponseDto;
 import com.example.springbootlibraryproject.dto.updateRequest.BookUpdateRequestDto;
 import com.example.springbootlibraryproject.entity.Book;
-import com.example.springbootlibraryproject.entity.Image;
 import com.example.springbootlibraryproject.entity.Stock;
 import org.springframework.stereotype.Component;
 
@@ -31,11 +29,6 @@ public class BookMapper {
                 .numbersOfPages(bookRequestDto.getNumbersOfPages())
                 .creationDate(bookRequestDto.getCreationDate())
                 .amountOfStock(bookRequestDto.getAmountOfStock())
-                .image(Image.builder()
-                        .name(bookRequestDto.getImageRequestDto().getImage())
-                        .type(bookRequestDto.getImageRequestDto().getImage().substring(bookRequestDto.getImageRequestDto().getImage().length() - 3))
-                        .image(bookRequestDto.getImageRequestDto().getImage().getBytes())
-                        .build())
                 .stock(Stock.builder()
                         .amountOfStock(bookRequestDto.getAmountOfStock())
                         .build())
@@ -52,10 +45,10 @@ public class BookMapper {
                 .numbersOfPages(bookUpdateRequestDto.getNumbersOfPages())
                 .creationDate(bookUpdateRequestDto.getCreationDate())
                 .amountOfStock(bookUpdateRequestDto.getAmountOfStock())
-                .image(Image.builder()
-                        .id(bookUpdateRequestDto.getImageUpdateRequestDto().getId())
-                        .image(bookUpdateRequestDto.getImageUpdateRequestDto().getImage().getBytes())
-                        .build())
+                /*.stock(Stock.builder()
+                        .id(bookUpdateRequestDto.getStockUpdateRequestDto().getId())
+                        .amountOfStock(bookUpdateRequestDto.getAmountOfStock())
+                        .build())*/
                 .build();
     }
 
@@ -69,15 +62,12 @@ public class BookMapper {
                 .numbersOfPages(book.getNumbersOfPages())
                 .creationDate(book.getCreationDate())
                 .amountOfStock(book.getAmountOfStock())
-                .imageResponseDto(ImageResponseDto.builder()
-                        .name(book.getImage().getName())
-                        .type(book.getImage().getType())
-                        .image(book.getImage().getImage())
-                        .build())
                 .stockResponseDto(StockResponseDto.builder()
                         .id(book.getId())
                         .amountOfStock(book.getAmountOfStock())
                         .build())
                 .build();
     }
+
+
 }

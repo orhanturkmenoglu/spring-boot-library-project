@@ -11,4 +11,6 @@ public class BookMessage {
     public static final String GET_BOOKS_BY_NAME = "Fetch by books name successful";
     public static final String UPDATE_BOOK = "Book update successful";
     public static final String DELETE_BOOK_BY_ID = "Deletion by book id successful";
+
+    public static final String SERVICE_UNAVAILABLE = "Book service unavailable";
 }
