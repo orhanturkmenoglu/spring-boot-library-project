@@ -6,7 +6,7 @@ import com.example.springbootlibraryproject.dto.updateRequest.MemberUpdateReques
 import com.example.springbootlibraryproject.entity.Member;
 import com.example.springbootlibraryproject.enums.Gender;
 import com.example.springbootlibraryproject.exceptions.MemberException;
-import com.example.springbootlibraryproject.mapper.MemmerMapper;
+import com.example.springbootlibraryproject.mapper.MemberMapper;
 import com.example.springbootlibraryproject.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final MemmerMapper memmerMapper;
+    private final MemberMapper memmerMapper;
 
     public MemberResponseDto createMember(MemberRequestDto memberRequestDto) {
         log.info("MemberService::createMember started");
