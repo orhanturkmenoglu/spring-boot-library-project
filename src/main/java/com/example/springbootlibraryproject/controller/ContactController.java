@@ -17,7 +17,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/contacts")
 @RequiredArgsConstructor
-@Slf4j
 public class ContactController {
 
     private final ContactService contactService;

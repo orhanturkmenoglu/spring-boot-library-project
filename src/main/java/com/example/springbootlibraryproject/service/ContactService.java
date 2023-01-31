@@ -37,7 +37,7 @@ public class ContactService {
         return contactMapper.mapToContactResponseDtoList(contactList);
     }
 
-    @CachePut(value = "contact",key = "#contactUpdateRequestDto")
+    @CachePut(value = "contact", key = "#contactUpdateRequestDto")
     public ContactResponseDto updateBook(ContactUpdateRequestDto contactUpdateRequestDto) {
         log.info("ContactService::updateBook started");
 
@@ -51,7 +51,7 @@ public class ContactService {
         return contactMapper.mapToContactResponseDto(save);
     }
 
-    @CacheEvict(value = "contact",key = "#id")
+    @CacheEvict(value = "contact", key = "#id")
     public void deleteContact(long id) {
         log.info("ContactService::deleteContact started");
 
