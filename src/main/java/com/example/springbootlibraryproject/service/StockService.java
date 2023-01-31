@@ -56,7 +56,7 @@ public class StockService {
         return stockMapper.mapToStockResponseDtoList(stockList);
     }
 
-    @CachePut(value = "stock",key = "#stockUpdateRequestDto")
+    @CachePut(value = "stock", key = "#stockUpdateRequestDto")
     public StockResponseDto updateStock(StockUpdateRequestDto stockUpdateRequestDto) {
         log.info("StockService::updateStock started");
 

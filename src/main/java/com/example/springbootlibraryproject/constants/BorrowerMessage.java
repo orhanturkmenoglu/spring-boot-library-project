@@ -7,6 +7,4 @@ public class BorrowerMessage {
     public static final String UPDATE_BORROWER = "Borrower update successful";
 
     public static final String DELETE_BORROWER_BY_ID = "Deletion by borrower id successful";
-
-    public static final String SERVICE_UNAVAILABLE = "Borrower service unavailable";
 }
