@@ -26,13 +26,13 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping
+    @PostMapping("/createMember")
     public ResponseEntity<MemberResponseDto> createMember(@RequestBody MemberRequestDto memberRequestDto) {
         MemberResponseDto memberResponseDto = memberService.createMember(memberRequestDto);
         return SuccessResponse.responseBuilder(MemberMessage.CREATE_MEMBER, HttpStatus.CREATED, memberResponseDto);
     }
 
-    @GetMapping
+    @GetMapping("/membersAll")
     public ResponseEntity<List<MemberResponseDto>> getMembersAll(@RequestParam(value = "firstName", required = false) String firstName) {
 
         if (LocalDateTime.now().getHour() == 11) {
@@ -48,13 +48,13 @@ public class MemberController {
         return SuccessResponse.responseBuilder(MemberMessage.GET_MEMBERS_BY_GENDER, HttpStatus.OK, memberResponseDtoList);
     }
 
-    @PutMapping
+    @PutMapping("/updateMember")
     public ResponseEntity<MemberResponseDto> updateMember(@Valid @RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
         MemberResponseDto memberResponseDto = memberService.updateMember(memberUpdateRequestDto);
         return SuccessResponse.responseBuilder(MemberMessage.UPDATE_MEMBER, HttpStatus.CREATED, memberResponseDto);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("deleteMember/{id}")
     public ResponseEntity<Void> deleteMember(@PathVariable("id") long id) {
         memberService.deleteMember(id);
         return SuccessResponse.responseBuilder(MemberMessage.DELETE_MEMBER_BY_ID, HttpStatus.OK);

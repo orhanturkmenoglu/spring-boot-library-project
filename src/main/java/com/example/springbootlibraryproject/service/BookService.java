@@ -40,7 +40,6 @@ public class BookService {
         log.info("BookService::createBook finished");
         return bookMapper.mapToBookResponseDto(save);
     }
-
     @Cacheable(value = "book")
     public List<BookResponseDto> getBooksAll() {
         log.info("BookService::getBooksAll started");

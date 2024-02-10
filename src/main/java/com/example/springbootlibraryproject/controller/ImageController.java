@@ -26,7 +26,7 @@ public class ImageController {
                 .body(image);
     }
 
-    @GetMapping
+    @GetMapping("/imagesAll")
     public ResponseEntity<List<ImageResponseDto>> getImagesAll() {
         List<ImageResponseDto> imageResponseDtoList = imageService.getImagesAll();
         return ResponseEntity.ok().body(imageResponseDtoList);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/books")
@@ -23,13 +24,13 @@ public class BookController {
 
     private final BookService bookService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<BookResponseDto> createBook(@Valid @RequestBody BookRequestDto bookRequestDto) {
         BookResponseDto bookResponseDto = bookService.createBook(bookRequestDto);
         return SuccessResponse.responseBuilder(BookMessage.CREATE_BOOK, HttpStatus.CREATED, bookResponseDto);
     }
 
-    @GetMapping
+    @GetMapping("/booksAll")
     public ResponseEntity<List<BookResponseDto>> getBooksAll() {
         List<BookResponseDto> bookResponseDtoList = bookService.getBooksAll();
         return SuccessResponse.responseBuilder(BookMessage.GET_BOOKS_ALL, HttpStatus.OK, bookResponseDtoList);
@@ -71,13 +72,13 @@ public class BookController {
         return SuccessResponse.responseBuilder(BookMessage.GET_BOOKS_AMOUNT_OF_STOCK_DESC, HttpStatus.OK, bookList);
     }
 
-    @PutMapping
+    @PutMapping("/updateBook")
     public ResponseEntity<BookResponseDto> updateBook(@Valid @RequestBody BookUpdateRequestDto bookUpdateRequestDto) {
         BookResponseDto bookResponseDto = bookService.updateBook(bookUpdateRequestDto);
         return SuccessResponse.responseBuilder(BookMessage.UPDATE_BOOK, HttpStatus.OK, bookResponseDto);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("deleteBook/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable("id") long id) {
         bookService.deleteBook(id);
         return SuccessResponse.responseBuilder(BookMessage.DELETE_BOOK_BY_ID, HttpStatus.OK);

@@ -23,26 +23,26 @@ public class BorrowerController {
 
     private final BorrowerService borrowerService;
 
-    @PostMapping
+    @PostMapping("/createBorrower")
     public ResponseEntity<BorrowerResponseDto> createBorrower(@RequestBody BorrowerRequestDto borrowerRequestDto) {
         BorrowerResponseDto borrowerResponseDto = borrowerService.createBorrower(borrowerRequestDto);
         return SuccessResponse.responseBuilder(BorrowerMessage.CREATE_BOOK, HttpStatus.CREATED, borrowerResponseDto);
     }
 
-    @GetMapping
+    @GetMapping("/borrowersAll")
     public ResponseEntity<List<BorrowerResponseDto>> getBorrowersAll() {
         List<BorrowerResponseDto> borrowerResponseDtoList = borrowerService.getBorrowersAll();
         return SuccessResponse.responseBuilder(BorrowerMessage.GET_BORROWERS_ALL, HttpStatus.OK, borrowerResponseDtoList);
     }
 
-    @PutMapping
-    public ResponseEntity<BorrowerResponseDto> updateBook(@Valid @RequestBody BorrowerUpdateRequestDto borrowerUpdateRequestDto) {
+    @PutMapping("/updateBorrower")
+    public ResponseEntity<BorrowerResponseDto> updateBorrower(@Valid @RequestBody BorrowerUpdateRequestDto borrowerUpdateRequestDto) {
         BorrowerResponseDto borrowerResponseDto = borrowerService.updateBorrower(borrowerUpdateRequestDto);
         return SuccessResponse.responseBuilder(BorrowerMessage.UPDATE_BORROWER, HttpStatus.CREATED, borrowerResponseDto);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBook(@PathVariable("id") long id) {
+    @DeleteMapping("deleteBorrower/{id}")
+    public ResponseEntity<Void> deleteBorrower(@PathVariable("id") long id) {
         borrowerService.deleteBook(id);
         return SuccessResponse.responseBuilder(BorrowerMessage.DELETE_BORROWER_BY_ID, HttpStatus.OK);
     }

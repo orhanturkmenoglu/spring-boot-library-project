@@ -21,13 +21,13 @@ public class StockController {
 
     private final StockService stockService;
 
-    @PostMapping
+    @PostMapping("/createStock")
     public ResponseEntity<StockResponseDto> createStock(@RequestBody StockRequestDto stockRequestDto) {
         StockResponseDto stockResponseDto = stockService.createStock(stockRequestDto);
         return SuccessResponse.responseBuilder(StockMessage.CREATE_STOCK, HttpStatus.CREATED, stockResponseDto);
     }
 
-    @GetMapping
+    @GetMapping("/stocksAll")
     public ResponseEntity<List<StockResponseDto>> getStocksAll() {
         List<StockResponseDto> stockResponseDtoList = stockService.getStocksAll();
         return SuccessResponse.responseBuilder(StockMessage.GET_STOCKS_ALL, HttpStatus.OK, stockResponseDtoList);
