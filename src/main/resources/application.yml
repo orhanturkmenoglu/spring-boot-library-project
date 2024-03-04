@@ -20,9 +20,4 @@ spring:
     database: mysql
 
 
-    #spring security configuration
-  security:
-    user:
-      name: admin
-      password: test12345
 

@@ -5,31 +5,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfig {
 
     @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
+    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
 
-        UserDetails admin = User.builder()
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
-                .username("admin")
-                .password("{noop}test12345*")
-                .roles("ADMIN")
-                .build();
+        jdbcUserDetailsManager.setUsersByUsernameQuery("select user_name , password , active from users where user_name=?");
 
-        UserDetails user = User.builder()
-                .username("user")
-                .password("{noop}test12345")
-                .roles("USER")
-                .build();
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select user_name , role  from roles where user_name = ?");
 
-        return new InMemoryUserDetailsManager(admin, user);
+        return jdbcUserDetailsManager;
     }
 
     @Bean
@@ -47,6 +40,7 @@ public class SecurityConfig {
                         .antMatchers(HttpMethod.GET, "api/v1/books/getBooksAmountOfStockOrderByDesc").hasRole("USER")
                         .antMatchers(HttpMethod.DELETE, "api/v1/books/deleteBook/**").hasRole("USER")
                         .antMatchers(HttpMethod.PUT, "api/v1/books/updateBook").hasRole("ADMIN")
+                        .antMatchers(HttpMethod.GET, "/api/v1/").hasRole("ADMIN").anyRequest().permitAll()
         );
 
         // use HTTP Basic Authentication
